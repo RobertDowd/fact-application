@@ -97,24 +97,3 @@ class RandomFactController extends Controller
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        // $cUrl .= $formFields[success', 'Request status updated'scheduleRoomId'] . '?nights=' . $formFields['numNights'];
-        // $jsonData = json_encode($formFields);
-
-        // $response = app('Curl')->postRequest($cUrl, $jsonData);
-        // if ($response) {
-        //     return "1";
-
