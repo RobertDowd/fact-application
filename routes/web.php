@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/random/show/', 'App\Http\Controllers\RandomFactController@showFact')->name('randomfact');
+Route::get('/random/private/{id}', 'App\Http\Controllers\RandomFactController@showPrivateFact')->name('randomfact');
+
 Route::get('/randomhistoric/show/{date}', 'App\Http\Controllers\RandomFactController@showHistoricFact')->name('randomfact');
 Route::put('/home', 'App\Http\Controllers\RandomFactController@createFact')->name('randomfact');
 

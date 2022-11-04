@@ -53,13 +53,12 @@ class RandomFactController extends Controller
         $month = $randomHistoricFact['contents']['month'];
         $year = $randomHistoricFact['contents']['year'];
         $event = $randomHistoricFact['contents']['event'];
-
         return response(compact('day', 'month', 'year', 'event'));
     }
     
 
     // Function to complete a PUT request using the new fact provided by user
-    public function createFact(Request $request){
+    private function createFact(Request $request){
             $formFields = $request->all();
             unset($formFields['_token'], $formFields['_method']);
             
@@ -79,6 +78,24 @@ class RandomFactController extends Controller
             }
 
     }
+
+    private function showPrivateFact($id)
+    {
+        $cUrl = env('FACTAPI') .'/fact/?id=' . $id;
+        $privateFact = app('Curl')->getMetaData($cUrl);
+        $fact = $privateFact['contents']['fact'];
+        $category = $privateFact['contents']['category'];
+        $subcategory = $privateFact['contents']['subcategory'];
+        if($response['status'] == 200){
+            redirect()->back()->with(compact('fact', 'category', 'subcategory'));
+        }
+         else {
+            $error = json_decode($response['response'], true);
+            die();
+        }
+    }
+
+    
 }
 
 

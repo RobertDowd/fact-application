@@ -20,14 +20,14 @@
     @endif
     <div class="row">
       <div class="col-lg-4 col-md-12" >
-          <div class="card shadow mb-4" >
+          <div class="card shadow mb-4" style="min-height: 460px;">
             <!-- Card Header  -->
             <div class="card-header py-3 d-flex flex-row align-items-center text-center justify-content-between">
                 <h2 class="m-0 font-weight-bold text-primary ">Random fact</h2>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <button id="random" class="float-right btn btn-primary">Random</button>
+                <button id="random" class="btn btn-primary">Random</button>
             </div>
           </div>
       </div>
@@ -103,6 +103,28 @@
        <button id="submitFact" class="float-right btn btn-primary">Submit</button>
       </form>
      </div>
+    </div>
+
+
+    <div class="col-lg-4 col-md-12" >
+    <div class="card shadow mb-4" style="min-height: 460px;">
+      <!-- Card Header  -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h2 class="m-0 font-weight-bold text-primary">Show a private fact</h2>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <form id="getFact">    
+        <div class="form-group row mb-2">
+          <label for="" class="col-sm-4 col-form-control">Please enter the fact ID:</label>
+          <div class="col-sm-8">
+            <input name="privateFact" id="privateFact" type="text"" class="form-control form-control-sm" value="">
+          </div>
+        </div>
+       <button id="submitPrivateFact" class="float-right btn btn-primary">Submit</button>
+        </form>
+     </div>
+    </div>
 
  <!-- Bootstrap fact display modal  -->
       <div class="modal fade" id="factModal" tabindex="-1" role="dialog" aria-labelledby="factModalLabel" aria-hidden="true">
@@ -159,6 +181,19 @@ $(document).ready(function() {
       console.log(response);
       $('#factModal').modal('show');
       $('#factOutput').html("<h3 class='text-center'>Your Random Fact</h3><div class='card text-bg-info mb-3 mt-3 pt-4 pb-4 center' style=''><h4>Catagory: " + response['category'] + "</h4><h5>Subcatagory: " + response['subcategory'] + "</h5><strong>" + response['fact'] + "</strong></div>" );
+    });
+  });
+
+  $("#getFact").submit(function(e) {
+    e.preventDefault();
+});
+    // Get private
+  $('#submitPrivateFact').click(function(){
+    var id = $('#privateFact').val();
+    $.get('/random/private/' + id , function(response) {
+      console.log(response);
+      $('#factModal').modal('show');
+      $('#factOutput').html("<h3 class='text-center'>Your Fact</h3><div class='card text-bg-info mb-3 mt-3 pt-4 pb-4 center' style=''><h4>Catagory: " + response['category'] + "</h4><h5>Subcatagory: " + response['subcategory'] + "</h5><strong>" + response['fact'] + "</strong></div>" );
     });
   });
 });
