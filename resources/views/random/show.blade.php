@@ -1,0 +1,2 @@
+
+{{$randomFact['fact']}}

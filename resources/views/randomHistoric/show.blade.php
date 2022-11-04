@@ -1,0 +1,2 @@
+
+{{ $randomHistoricFact['contents']['event']}}
