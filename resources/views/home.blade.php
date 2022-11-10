@@ -13,27 +13,32 @@
     <div class="home-header text-center">
         <h1 class="center">Welcome to the Facts Application</h1>
         <strong>Please select one of the options below </strong><br>
+        <br><br>
     </div>
     <!-- Checks if response is there from PUT request -->
     @if (session()->get( 'request' ))
-      <div class="alert alert-success">Fact submitted successfully</div>
+      <div class="alert alert-success">Fact submitted successfully<br><br>
+      {{ session()->get( 'request' ) }}
+      
+      </div>
     @endif
     <div class="row">
       <div class="col-lg-4 col-md-12" >
-          <div class="card shadow mb-4" style="min-height: 460px;">
+          <div class="card shadow mb-4" style="min-height: 360px;">
             <!-- Card Header  -->
             <div class="card-header py-3 d-flex flex-row align-items-center text-center justify-content-between">
                 <h2 class="m-0 font-weight-bold text-primary ">Random fact</h2>
             </div>
             <!-- Card Body -->
             <div class="card-body">
+            <p>Click on the button below to reveal a random fact.</p>
                 <button id="random" class="btn btn-primary">Random</button>
             </div>
           </div>
       </div>
   
       <div class="col-lg-4 col-md-12" >
-        <div class="card shadow mb-4" style="min-height: 460px;">
+        <div class="card shadow mb-4" style="min-height: 360px;">
             <!-- Card Header  -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h2 class="m-0 font-weight-bold text-primary ">Random Historic</h2>
@@ -62,7 +67,7 @@
 </div>
  <!-- Submit private fact  -->
   <div class="col-lg-4 col-md-12" >
-    <div class="card shadow mb-4" style="min-height: 460px;">
+    <div class="card shadow mb-4" style="min-height: 360px;">
       <!-- Card Header  -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h2 class="m-0 font-weight-bold text-primary">Submit a private fact</h2>
@@ -76,38 +81,37 @@
         <div class="form-group row mb-2">
           <label for=""class="col-sm-4 col-form-control">The fact</label>
           <div class="col-sm-8">
-            <input name="fact" type="text"" class="form-control form-control-sm" value="">
+            <input name="fact" id='fact' type="text"" class="form-control @error('fact') is-invalid @enderror" value="" required autofocus>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label for=""class="col-sm-4 col-form-control">Catagory</label>
           <div class="col-sm-8">
-            <input name="category" type="text"" class="form-control form-control-sm" value="">
+          <input name="category" id='category' type="text"" class="form-control @error('category') is-invalid @enderror" value="" required autofocus>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label for=""class="col-sm-4 col-form-control">Subcatagory</label>
           <div class="col-sm-8">
-            <input name="subcategory" type="text"" class="form-control form-control-sm" value="">
+          <input name="subcategory" id='subcategory' type="text"" class="form-control @error('subcategory') is-invalid @enderror" value="" required autofocus>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label for=""class="col-sm-4 col-form-control">Add a tag</label>
           <div class="col-sm-8">
-            <input name="tags" type="text"" class="form-control form-control-sm" value="">
+          <input name="tag" id='tag' type="text"" class="form-control @error('tag') is-invalid @enderror" value="" required autofocus>
           </div>
         </div>
        <button id="submitFact" class="float-right btn btn-primary">Submit</button>
       </form>
      </div>
     </div>
-
-
+</div>
     <div class="col-lg-4 col-md-12" >
-    <div class="card shadow mb-4" style="min-height: 460px;">
+    <div class="card shadow mb-4" style="min-height: 360px;">
       <!-- Card Header  -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h2 class="m-0 font-weight-bold text-primary">Show a private fact</h2>
@@ -131,6 +135,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content"  style="width:700px;min-height:650px;">
             <div class="modal-header">
+
               <h5 class="modal-title" id="factModalLabel"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -164,6 +169,8 @@
     });
 
 $(document).ready(function() {
+
+
 
   // gets date value when input and passes to controller
   $('#dateValue').change(function(){
